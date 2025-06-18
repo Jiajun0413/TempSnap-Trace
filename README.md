@@ -5,7 +5,7 @@
 TempSnap-Trace is a Python-based pipeline for the dynamic analysis of viral evolution using temporal haplotype networks. It processes raw sequence data and metadata to construct time-resolved evolutionary networks, detect communities, extract evolutionary backbones, and track specific community evolution chains over time. The pipeline is modular and leverages parallel processing to handle large datasets efficiently.
 
 <p align="center">
-  <img src="image.png" alt="TempSnap-Trace Schematic" width="800"/>
+  <img src="Flow_chart.png" alt="TempSnap-Trace Schematic" width="800"/>
   <br>
   <em>Figure 1. The schematic of the TempSnap-Trace algorithm.</em>
 </p>
