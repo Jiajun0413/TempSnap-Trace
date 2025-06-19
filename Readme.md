@@ -41,7 +41,7 @@ pip install -r requirements.txt
 1.  **Clone the repository:**
     ```bash
     git clone https://github.com/Jiajun0413/TempSnap-Trace
-    cd TempSnap-Trace # Adjust path as needed
+    cd TempSnap-Trace
     ```
 2.  **Install Python dependencies:**
     ```bash
