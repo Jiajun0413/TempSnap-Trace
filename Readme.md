@@ -40,7 +40,7 @@ pip install -r requirements.txt
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/Jiajun0413/TempSnap-Trace
+    git clone https://github.com/Jiajun0413/TempSnap-Trace.git
     cd TempSnap-Trace
     ```
 2.  **Install Python dependencies:**
