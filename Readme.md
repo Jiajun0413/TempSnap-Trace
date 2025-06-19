@@ -184,8 +184,11 @@ if communities and graphs:
 *   **HDF5 Storage:** Results are stored efficiently in HDF5 format. Ensure sufficient disk space.
 *   **Logging:** `main.py` logs progress to the console and to `log.txt` in the output directory.
 
-## Citation
+## Supplementary Data
 
-If you use TempSnap-Trace in your research, please cite:
+The following datasets and their respective analysis results can be obtained from https://zenodo.org/records/15696574:
 
-*[Insert citation details here: e.g., publication, software DOI, repository link]*
+Dataset 1 (South_Africa.zip)
+Dataset 2 (Brazil.zip)
+Dataset 3 (Global_dataset.zip)
+Dataset 4 (Mpox.zip)
