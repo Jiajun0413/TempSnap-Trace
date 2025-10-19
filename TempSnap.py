@@ -1,4 +1,7 @@
-# v 2025-04-15
+# Author: Liu Jiajun
+# Date: 2025-10-19
+#
+# This script is written by Liu Jiajun. The corresponding article is "TempSnap-Trace: A Temporal Snapshot-Based Framework for Haplotype Network Tracing."
 import collections
 import datetime as dt
 import io
@@ -19,8 +22,7 @@ import pandas as pd
 import psutil
 import McAN 
 import matplotlib.pyplot as plt
-import seaborn as sns
-from matplotlib.colors import to_rgba
+
 
 # --- Constants ---
 DEFAULT_PROCESS_COUNT = 4
@@ -69,8 +71,7 @@ class LogManager:
         if output_dir:
             os.makedirs(output_dir, exist_ok=True)
             log_file = os.path.join(output_dir, "log.txt")
-            mode = 'a' if append_mode or process_type == "subprocess" else 'w'
-            file_handler = logging.FileHandler(log_file, mode=mode)
+            file_handler = logging.FileHandler(log_file, mode='a')
             file_handler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
             root_logger.addHandler(file_handler)
         
@@ -662,29 +663,44 @@ class TempSnap:
             return None
         
     def _load_or_get_data(self, file_path: Optional[str], current_data: List, data_type: str, default_pattern: str) -> Tuple[List, Optional[str]]:
-        """Helper to load data from HDF5 or use existing data."""
-        if file_path:
-            #logging.info(f"Loading {data_type} from: {os.path.basename(file_path)}")
-            # Pass self.num_processes to load_from_hdf5 as parallelism_level
-            loaded_data = IOManager.load_from_hdf5(file_path, parallelism_level=self.num_processes)
-            # ... (rest of the method) ...
-            match = re.search(default_pattern.replace('{start}', r'(\d{4}-\d{2}-\d{2})').replace('{end}', r'(\d{4}-\d{2}-\d{2})'), os.path.basename(file_path))
+        """Load data from disk when needed, otherwise reuse in-memory results."""
+
+        def _sync_dates(path: Optional[str]) -> None:
+            if not path:
+                return
+            match = re.search(
+                default_pattern.replace('{start}', r'(\d{4}-\d{2}-\d{2})').replace('{end}', r'(\d{4}-\d{2}-\d{2})'),
+                os.path.basename(path)
+            )
             if match:
                 self.start_date = self.start_date or match.group(1)
                 self.end_date = self.end_date or match.group(2)
-            return loaded_data, file_path
-        elif current_data:
-            logging.info(f"Using pre-loaded {data_type}.")
-            return current_data, None
-        elif self.start_date and self.end_date:
-            default_path = os.path.join(self.output_path, default_pattern.format(start=self.start_date, end=self.end_date))
-            if os.path.exists(default_path):
-                logging.warning(f"No {data_type} provided, loading default: {os.path.basename(default_path)}")
-                return self._load_or_get_data(default_path, [], data_type, default_pattern) # Recursive call
+
+        if current_data:
+            logging.info(f"Using in-memory {data_type} to reduce disk reads.")
+            _sync_dates(file_path)
+            return current_data, file_path
+
+        candidate_path = file_path
+
+        if not candidate_path and self.start_date and self.end_date:
+            candidate_path = os.path.join(
+                self.output_path,
+                default_pattern.format(start=self.start_date, end=self.end_date)
+            )
+            if os.path.exists(candidate_path):
+                logging.info(f"No explicit {data_type} path provided; automatically using {os.path.basename(candidate_path)}.")
             else:
-                raise ValueError(f"{data_type.capitalize()} are required but none provided or found.")
-        else:
-            raise ValueError(f"{data_type.capitalize()} are required, but none provided and date range unknown.")
+                candidate_path = None
+
+        if candidate_path:
+            if not os.path.exists(candidate_path):
+                raise FileNotFoundError(f"File not found: {candidate_path}")
+            loaded_data = IOManager.load_from_hdf5(candidate_path, parallelism_level=self.num_processes)
+            _sync_dates(candidate_path)
+            return loaded_data, candidate_path
+
+        raise ValueError(f"{data_type.capitalize()} are required but none provided or found.")
 
     def build_temporal_graphs(self, raw_results_path: Optional[str] = None) -> str:
         """Builds graphs for each time snapshot in parallel."""
@@ -844,7 +860,7 @@ class TempSnap:
     def detect_communities_and_backbones(self,
                                          graphs_path: Optional[str] = None,
                                          raw_results_path: Optional[str] = None
-                                         ) -> Tuple[str, str, str, str]:
+                                         ) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str]]:
         """Performs community detection and backbone extraction for all graphs in parallel."""
         logging.info("Starting community detection and backbone extraction...")
         start_detect_time = dt.datetime.now()
@@ -870,12 +886,12 @@ class TempSnap:
 
         if not isinstance(graphs_to_process, list) or not graphs_to_process:
             logging.warning("Graph list empty. Skipping detection.")
-            # Return empty file paths
             suffix = f"{self.start_date}_to_{self.end_date}.h5" if self.start_date and self.end_date else "empty.h5"
-            paths = [os.path.join(self.output_path, f"{prefix}_{suffix}") for prefix in
-                     ["Community_structures", "Network_metrics", "Backbone_networks", "Backbone_tables"]]
-            for p in paths:
-                IOManager.save_to_hdf5([], p)  # Save empty lists
+            paths = []
+            for prefix in ["Community_structures", "Network_metrics", "Backbone_networks", "Backbone_tables"]:
+                filepath = os.path.join(self.output_path, f"{prefix}_{suffix}")
+                IOManager.save_to_hdf5([], filepath)
+                paths.append(filepath)
             return tuple(paths)
 
         num_graphs = len(graphs_to_process)
@@ -914,9 +930,10 @@ class TempSnap:
 
         logging.info(f"Finished detection in {(dt.datetime.now() - start_detect_time).total_seconds():.2f}s.")
 
-        # Save results
+        # Save results if requested
         suffix = f"{self.start_date}_to_{self.end_date}.h5" if self.start_date and self.end_date else "results.h5"
-        paths = {}
+
+        paths: Dict[str, Optional[str]] = {}
         results_to_save = {
             "Community_structures": final_communities,
             "Network_metrics": final_metrics,
@@ -926,16 +943,20 @@ class TempSnap:
         for prefix, data in results_to_save.items():
             filepath = os.path.join(self.output_path, f"{prefix}_{suffix}")
             try:
-                # Pass self.num_processes to save_to_hdf5
                 IOManager.save_to_hdf5(data, filepath, num_threads=self.num_processes)
                 paths[prefix] = filepath
             except Exception as e:
-                 logging.error(f"Failed to save {prefix}: {e}", exc_info=True)
-                 paths[prefix] = None # Indicate save failure
+                logging.error(f"Failed to save {prefix}: {e}", exc_info=True)
+                paths[prefix] = None
 
-        return paths.get("Community_structures"), paths.get("Network_metrics"), paths.get("Backbone_networks"), paths.get("Backbone_tables")
+        return (
+            paths.get("Community_structures"),
+            paths.get("Network_metrics"),
+            paths.get("Backbone_networks"),
+            paths.get("Backbone_tables")
+        )
 
-    def run_full_pipeline(self, n_rows_mcan: Optional[int] = None) -> Tuple[str, str, str, str]:
+    def run_full_pipeline(self, n_rows_mcan: Optional[int] = None) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str]]:
         """Runs the complete analysis pipeline."""
         logging.info("--- Starting Full TempSnap Pipeline ---")
         pipeline_start_time = dt.datetime.now()

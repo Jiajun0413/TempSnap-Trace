@@ -1,0 +1,287 @@
+2025-10-08 14:14:48,821 - INFO - Starting performance comparison test
+2025-10-08 14:14:48,822 - INFO - TempSnap input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25glob/sequences_900w.fasta
+2025-10-08 14:14:48,822 - INFO - VENAS input file: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/venas_test/sequences_900w_halign4_2019_12-2025_09_20.fasta
+2025-10-08 14:14:48,822 - INFO - Output directory: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS
+2025-10-08 14:14:48,822 - INFO - Number of processes: 16
+2025-10-08 14:14:48,822 - INFO - ================================================================================
+2025-10-08 14:14:48,822 - INFO - EXECUTING TEMPSNAP
+2025-10-08 14:14:48,822 - INFO - ================================================================================
+2025-10-08 14:14:48,822 - INFO - ============================================================
+2025-10-08 14:14:48,822 - INFO - Starting TempSnap
+2025-10-08 14:14:48,822 - INFO - ============================================================
+2025-10-08 14:14:48,822 - INFO - Starting monitoring - Memory usage: 36987.37 MB
+2025-10-08 14:14:48,823 - INFO - TempSnap: Running complete pipeline with 'all' command
+2025-10-08 14:14:48,823 - INFO - Executing command: python /home/liujiajun/projects/Hap_networks/module/09-25/main.py --command all --input_dir /home/liujiajun/projects/Hap_networks/module/09-25/09-25glob/sequences_900w.fasta --output_dir /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS --p 16 --ratio 0.001 --ref NC_045512.2 --start 2025-09-13 --end 2025-09-20 --interval 7
+2025-10-09 13:51:55,769 - INFO - TempSnap execution successful
+2025-10-09 13:51:55,771 - INFO - Stopping monitoring - Memory usage: 49543.32 MB
+2025-10-09 13:51:55,771 - INFO - TempSnap performance recorded: {'duration_seconds': 85026.94866394997, 'duration_minutes': 1417.1158110658328, 'memory_used_mb': 12555.9453125, 'peak_memory_mb': 49543.31640625}
+2025-10-09 13:51:55,771 - INFO - ================================================================================
+2025-10-09 13:51:55,771 - INFO - EXECUTING VENAS
+2025-10-09 13:51:55,771 - INFO - ================================================================================
+2025-10-09 13:51:55,771 - INFO - ============================================================
+2025-10-09 13:51:55,772 - INFO - Starting VENAS
+2025-10-09 13:51:55,772 - INFO - ============================================================
+2025-10-09 13:51:55,772 - INFO - Starting monitoring - Memory usage: 49543.32 MB
+2025-10-09 13:51:55,772 - INFO - Set OMP_NUM_THREADS to 16 for VENAS parallel processing
+2025-10-09 15:08:15,569 - INFO - Using reference sequence ID: NC_045512.2
+2025-10-09 15:08:15,570 - INFO - VENAS Part 1: ePIS finding
+2025-10-11 12:11:54,280 - INFO - VENAS Part 2: Network construction
+2025-10-11 13:21:40,455 - ERROR - VENAS Part 2 execution failed: terminate called after throwing an instance of 'std::bad_array_new_length'
+  what():  std::bad_array_new_length
+
+2025-10-11 13:21:40,457 - INFO - Stopping monitoring - Memory usage: 30416.75 MB
+2025-10-11 13:21:40,458 - INFO - VENAS performance recorded: {'duration_seconds': 170984.68543958664, 'duration_minutes': 2849.744757326444, 'memory_used_mb': -19126.56640625, 'peak_memory_mb': 30416.75}
+2025-10-11 13:21:40,458 - INFO - ================================================================================
+2025-10-11 13:21:40,458 - INFO - GENERATING PERFORMANCE REPORT
+2025-10-11 13:21:40,458 - INFO - ================================================================================
+2025-10-11 13:21:40,458 - INFO - ============================================================
+2025-10-11 13:21:40,458 - INFO - Generating performance comparison report
+2025-10-11 13:21:40,458 - INFO - ============================================================
+2025-10-11 13:21:42,853 - INFO - Performance report saved to: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/performance_comparison.csv
+2025-10-11 13:21:43,236 - INFO - Performance comparison completed
+2025-10-11 13:21:43,236 - WARNING - Only TempSnap executed successfully
+2025-10-11 13:21:57,556 - INFO - Temporary files cleaned up
+2025-10-12 16:27:40,746 - INFO - Starting performance comparison test
+2025-10-12 16:27:40,746 - INFO - TempSnap input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta
+2025-10-12 16:27:40,746 - INFO - VENAS input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_halign4_2022-2025_07_23.fasta
+2025-10-12 16:27:40,746 - INFO - Output directory: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox
+2025-10-12 16:27:40,746 - INFO - Number of processes: 16
+2025-10-12 16:27:40,749 - INFO - ================================================================================
+2025-10-12 16:27:40,749 - INFO - EXECUTING TEMPSNAP
+2025-10-12 16:27:40,749 - INFO - ================================================================================
+2025-10-12 16:27:40,750 - INFO - ============================================================
+2025-10-12 16:27:40,750 - INFO - Starting TempSnap
+2025-10-12 16:27:40,750 - INFO - ============================================================
+2025-10-12 16:27:40,750 - INFO - Starting monitoring - Memory usage: 32940.41 MB
+2025-10-12 16:27:40,751 - INFO - TempSnap: Running complete pipeline with 'all' command
+2025-10-12 16:27:40,751 - INFO - Executing command: python /home/liujiajun/projects/Hap_networks/module/09-25/main.py --command all --input_dir /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta --output_dir /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox --p 16 --ratio 0.01 --ref NC_003310.1 --start 2025-06-25 --end 2025-07-23 --interval 28
+2025-10-12 16:29:14,905 - INFO - TempSnap execution successful
+2025-10-12 16:29:14,907 - INFO - Stopping monitoring - Memory usage: 34262.05 MB
+2025-10-12 16:29:14,907 - INFO - TempSnap performance recorded: {'duration_seconds': 94.15713763237, 'duration_minutes': 1.5692856272061666, 'memory_used_mb': 1321.640625, 'peak_memory_mb': 34262.05078125}
+2025-10-12 16:29:14,908 - INFO - ================================================================================
+2025-10-12 16:29:14,908 - INFO - EXECUTING VENAS
+2025-10-12 16:29:14,908 - INFO - ================================================================================
+2025-10-12 16:29:14,908 - INFO - ============================================================
+2025-10-12 16:29:14,908 - INFO - Starting VENAS
+2025-10-12 16:29:14,908 - INFO - ============================================================
+2025-10-12 16:29:14,908 - INFO - VENAS Part 1 results not found, starting from Part 1
+2025-10-12 16:29:14,909 - INFO - Starting monitoring - Memory usage: 34262.05 MB
+2025-10-12 16:29:14,909 - INFO - Set OMP_NUM_THREADS to 16 for VENAS parallel processing
+2025-10-12 16:29:44,687 - INFO - Using reference sequence ID: NC_003310.1
+2025-10-12 16:29:44,688 - INFO - VENAS Part 1: ePIS finding
+2025-10-12 17:27:02,958 - INFO - Starting performance comparison test
+2025-10-12 17:27:02,958 - INFO - TempSnap input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta
+2025-10-12 17:27:02,958 - INFO - VENAS input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_halign4_2022-2025_07_23.fasta
+2025-10-12 17:27:02,958 - INFO - Output directory: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results
+2025-10-12 17:27:02,958 - INFO - Number of processes: 16
+2025-10-12 17:27:02,966 - INFO - ================================================================================
+2025-10-12 17:27:02,967 - INFO - EXECUTING TEMPSNAP
+2025-10-12 17:27:02,967 - INFO - ================================================================================
+2025-10-12 17:27:02,967 - INFO - ============================================================
+2025-10-12 17:27:02,967 - INFO - Starting TempSnap
+2025-10-12 17:27:02,967 - INFO - ============================================================
+2025-10-12 17:27:02,967 - INFO - Starting monitoring - Memory usage: 33571.33 MB
+2025-10-12 17:27:03,002 - INFO - TempSnap: Running complete pipeline with 'all' command
+2025-10-12 17:27:03,002 - INFO - Executing command: python /home/liujiajun/projects/Hap_networks/module/09-25/main.py --command all --input_dir /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta --output_dir /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results/tempsnap_results --p 16 --ratio 0.01 --ref NC_003310.1 --start 2025-06-25 --end 2025-07-23 --interval 28
+2025-10-12 17:27:45,095 - INFO - TempSnap execution successful
+2025-10-12 17:27:45,095 - INFO - Stopping monitoring - Memory usage: 35273.79 MB
+2025-10-12 17:27:45,095 - INFO - TempSnap performance recorded: {'duration_seconds': 42.128124475479126, 'duration_minutes': 0.7021354079246521, 'memory_used_mb': 1702.45703125, 'peak_memory_mb': 35273.78515625}
+2025-10-12 17:27:45,095 - INFO - ================================================================================
+2025-10-12 17:27:45,095 - INFO - EXECUTING VENAS
+2025-10-12 17:27:45,095 - INFO - ================================================================================
+2025-10-12 17:27:45,095 - INFO - ============================================================
+2025-10-12 17:27:45,095 - INFO - Starting VENAS
+2025-10-12 17:27:45,095 - INFO - ============================================================
+2025-10-12 17:27:45,097 - INFO - VENAS Part 1 results not found, starting from Part 1
+2025-10-12 17:27:45,097 - INFO - Starting monitoring - Memory usage: 35273.79 MB
+2025-10-12 17:27:45,097 - INFO - Set OMP_NUM_THREADS to 16 for VENAS parallel processing
+2025-10-12 17:27:52,998 - INFO - Using reference sequence ID: NC_003310.1
+2025-10-12 17:27:53,000 - INFO - VENAS Part 1: ePIS finding
+2025-10-12 18:30:15,526 - INFO - Starting performance comparison test
+2025-10-12 18:30:15,526 - INFO - TempSnap input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta
+2025-10-12 18:30:15,526 - INFO - VENAS input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_halign4_2022-2025_07_23.fasta
+2025-10-12 18:30:15,526 - INFO - Output directory: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results
+2025-10-12 18:30:15,526 - INFO - Number of processes: 16
+2025-10-12 18:30:15,537 - INFO - ================================================================================
+2025-10-12 18:30:15,537 - INFO - EXECUTING TEMPSNAP
+2025-10-12 18:30:15,537 - INFO - ================================================================================
+2025-10-12 18:30:15,537 - INFO - ============================================================
+2025-10-12 18:30:15,537 - INFO - Starting TempSnap
+2025-10-12 18:30:15,537 - INFO - ============================================================
+2025-10-12 18:30:15,538 - INFO - Starting monitoring - Memory usage: 33968.77 MB
+2025-10-12 18:30:15,574 - INFO - TempSnap: Running complete pipeline with 'all' command
+2025-10-12 18:30:15,574 - INFO - Executing command: python /home/liujiajun/projects/Hap_networks/module/09-25/main.py --command all --input_dir /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta --output_dir /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results/tempsnap_results --p 16 --ratio 0.01 --ref NC_003310.1 --start 2025-06-24 --end 2025-07-23 --interval 28
+2025-10-12 18:31:00,487 - INFO - TempSnap execution successful
+2025-10-12 18:31:00,488 - INFO - Stopping monitoring - Memory usage: 35517.77 MB
+2025-10-12 18:31:00,488 - INFO - TempSnap performance recorded: {'duration_seconds': 44.94977355003357, 'duration_minutes': 0.7491628925005595, 'memory_used_mb': 1548.9921875, 'peak_memory_mb': 35517.765625}
+2025-10-12 18:31:00,488 - INFO - ================================================================================
+2025-10-12 18:31:00,488 - INFO - EXECUTING VENAS
+2025-10-12 18:31:00,488 - INFO - ================================================================================
+2025-10-12 18:31:00,488 - INFO - ============================================================
+2025-10-12 18:31:00,488 - INFO - Starting VENAS
+2025-10-12 18:31:00,488 - INFO - ============================================================
+2025-10-12 18:31:00,489 - INFO - VENAS Part 1 results not found, starting from Part 1
+2025-10-12 18:31:00,489 - INFO - Starting monitoring - Memory usage: 35517.77 MB
+2025-10-12 18:31:00,489 - INFO - Set OMP_NUM_THREADS to 16 for VENAS parallel processing
+2025-10-12 18:31:08,305 - INFO - Using reference sequence ID: NC_003310.1
+2025-10-12 18:31:08,306 - INFO - VENAS Part 1: ePIS finding
+2025-10-12 18:43:21,055 - INFO - Starting performance comparison test
+2025-10-12 18:43:21,055 - INFO - TempSnap input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta
+2025-10-12 18:43:21,055 - INFO - VENAS input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_halign4_2022-2025_07_23.fasta
+2025-10-12 18:43:21,055 - INFO - Output directory: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results
+2025-10-12 18:43:21,055 - INFO - Number of processes: 16
+2025-10-12 18:43:21,067 - INFO - ================================================================================
+2025-10-12 18:43:21,067 - INFO - EXECUTING TEMPSNAP
+2025-10-12 18:43:21,067 - INFO - ================================================================================
+2025-10-12 18:43:21,067 - INFO - ============================================================
+2025-10-12 18:43:21,067 - INFO - Starting TempSnap
+2025-10-12 18:43:21,067 - INFO - ============================================================
+2025-10-12 18:43:21,067 - INFO - Starting monitoring - Memory usage: 34382.43 MB
+2025-10-12 18:43:21,101 - INFO - TempSnap: Running complete pipeline with 'all' command
+2025-10-12 18:43:21,101 - INFO - Executing command: python /home/liujiajun/projects/Hap_networks/module/09-25/main.py --command all --input_dir /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta --output_dir /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results/tempsnap_results --p 16 --ratio 0.01 --ref NC_003310.1 --start 2025-06-01 --end 2025-07-23 --interval 28
+2025-10-12 18:44:02,403 - INFO - TempSnap execution successful
+2025-10-12 18:44:02,403 - INFO - Stopping monitoring - Memory usage: 35477.21 MB
+2025-10-12 18:44:02,403 - INFO - TempSnap performance recorded: {'duration_seconds': 41.33555865287781, 'duration_minutes': 0.6889259775479635, 'memory_used_mb': 1094.77734375, 'peak_memory_mb': 35477.20703125}
+2025-10-12 18:44:02,403 - INFO - ================================================================================
+2025-10-12 18:44:02,403 - INFO - EXECUTING VENAS
+2025-10-12 18:44:02,403 - INFO - ================================================================================
+2025-10-12 18:44:02,403 - INFO - ============================================================
+2025-10-12 18:44:02,403 - INFO - Starting VENAS
+2025-10-12 18:44:02,403 - INFO - ============================================================
+2025-10-12 18:44:02,404 - INFO - VENAS Part 1 results not found, starting from Part 1
+2025-10-12 18:44:02,405 - INFO - Starting monitoring - Memory usage: 35477.21 MB
+2025-10-12 18:44:02,405 - INFO - Set OMP_NUM_THREADS to 16 for VENAS parallel processing
+2025-10-12 18:44:10,369 - INFO - Using reference sequence ID: NC_003310.1
+2025-10-12 18:44:10,370 - INFO - VENAS Part 1: ePIS finding
+2025-10-12 19:02:13,713 - INFO - Starting performance comparison test
+2025-10-12 19:02:13,714 - INFO - TempSnap input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta
+2025-10-12 19:02:13,714 - INFO - VENAS input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_halign4_2022-2025_07_23.fasta
+2025-10-12 19:02:13,714 - INFO - Output directory: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results
+2025-10-12 19:02:13,714 - INFO - Number of processes: 16
+2025-10-12 19:02:13,723 - INFO - ================================================================================
+2025-10-12 19:02:13,723 - INFO - EXECUTING TEMPSNAP
+2025-10-12 19:02:13,723 - INFO - ================================================================================
+2025-10-12 19:02:13,723 - INFO - ============================================================
+2025-10-12 19:02:13,723 - INFO - Starting TempSnap
+2025-10-12 19:02:13,723 - INFO - ============================================================
+2025-10-12 19:02:13,723 - INFO - Starting monitoring - Memory usage: 34666.69 MB
+2025-10-12 19:02:13,757 - INFO - TempSnap: Running complete pipeline with 'all' command
+2025-10-12 19:02:13,757 - INFO - Executing command: python /home/liujiajun/projects/Hap_networks/module/09-25/main.py --command all --input_dir /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta --output_dir /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results/tempsnap_results --p 16 --ratio 0.01 --ref NC_003310.1 --start 2025-06-25 --end 2025-07-23 --interval 28
+2025-10-12 19:02:54,674 - INFO - TempSnap execution successful
+2025-10-12 19:02:54,675 - INFO - Stopping monitoring - Memory usage: 35794.92 MB
+2025-10-12 19:02:54,675 - INFO - TempSnap performance recorded: {'duration_seconds': 40.95139813423157, 'duration_minutes': 0.6825233022371928, 'memory_used_mb': 1128.234375, 'peak_memory_mb': 35794.921875}
+2025-10-12 19:02:54,675 - INFO - ================================================================================
+2025-10-12 19:02:54,675 - INFO - EXECUTING VENAS
+2025-10-12 19:02:54,675 - INFO - ================================================================================
+2025-10-12 19:02:54,675 - INFO - ============================================================
+2025-10-12 19:02:54,675 - INFO - Starting VENAS
+2025-10-12 19:02:54,675 - INFO - ============================================================
+2025-10-12 19:02:54,676 - INFO - VENAS Part 1 results not found, starting from Part 1
+2025-10-12 19:02:54,676 - INFO - Starting monitoring - Memory usage: 35794.92 MB
+2025-10-12 19:02:54,676 - INFO - Set OMP_NUM_THREADS to 16 for VENAS parallel processing
+2025-10-12 19:03:02,548 - INFO - Using reference sequence ID: NC_003310.1
+2025-10-12 19:03:02,548 - INFO - VENAS Part 1: ePIS finding
+2025-10-12 19:24:49,910 - INFO - Starting performance comparison test
+2025-10-12 19:24:49,911 - INFO - TempSnap input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta
+2025-10-12 19:24:49,911 - INFO - VENAS input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_halign4_2022-2025_07_23.fasta
+2025-10-12 19:24:49,911 - INFO - Output directory: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results
+2025-10-12 19:24:49,911 - INFO - Number of processes: 16
+2025-10-12 19:24:49,920 - INFO - ================================================================================
+2025-10-12 19:24:49,920 - INFO - EXECUTING TEMPSNAP
+2025-10-12 19:24:49,920 - INFO - ================================================================================
+2025-10-12 19:24:49,920 - INFO - ============================================================
+2025-10-12 19:24:49,920 - INFO - Starting TempSnap
+2025-10-12 19:24:49,920 - INFO - ============================================================
+2025-10-12 19:24:49,921 - INFO - Starting monitoring - Memory usage: 36865.81 MB
+2025-10-12 19:24:49,956 - INFO - TempSnap: Running complete pipeline with 'all' command
+2025-10-12 19:24:49,956 - INFO - Executing command: python /home/liujiajun/projects/Hap_networks/module/09-25/main.py --command all --input_dir /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_filtered_N_lt_0.01_3688_2022-2025_07_23.fasta --output_dir /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results/tempsnap_results --p 16 --ratio 0.01 --ref NC_003310.1 --start 2025-06-25 --end 2025-07-23 --interval 28
+2025-10-12 19:25:30,207 - INFO - TempSnap execution successful
+2025-10-12 19:25:30,207 - INFO - Stopping monitoring - Memory usage: 36194.61 MB
+2025-10-12 19:25:30,207 - INFO - TempSnap performance recorded: {'duration_seconds': 40.286635875701904, 'duration_minutes': 0.6714439312616984, 'memory_used_mb': -671.203125, 'peak_memory_mb': 36194.609375}
+2025-10-12 19:25:30,207 - INFO - ================================================================================
+2025-10-12 19:25:30,207 - INFO - EXECUTING VENAS
+2025-10-12 19:25:30,207 - INFO - ================================================================================
+2025-10-12 19:25:30,207 - INFO - ============================================================
+2025-10-12 19:25:30,207 - INFO - Starting VENAS
+2025-10-12 19:25:30,207 - INFO - ============================================================
+2025-10-12 19:25:30,209 - INFO - VENAS Part 1 results not found, starting from Part 1
+2025-10-12 19:25:30,209 - INFO - Starting monitoring - Memory usage: 36194.61 MB
+2025-10-12 19:25:30,209 - INFO - Set OMP_NUM_THREADS to 16 for VENAS parallel processing
+2025-10-12 19:25:38,091 - INFO - Using reference sequence ID: NC_003310.1
+2025-10-12 19:25:38,091 - INFO - VENAS Part 1: ePIS finding
+2025-10-12 19:27:29,026 - INFO - Starting performance comparison test
+2025-10-12 19:27:29,027 - INFO - TempSnap input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/sequences_ncbi.fasta
+2025-10-12 19:27:29,027 - INFO - VENAS input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_halign4_2022-2025_07_23.fasta
+2025-10-12 19:27:29,027 - INFO - Output directory: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results
+2025-10-12 19:27:29,027 - INFO - Number of processes: 16
+2025-10-12 19:27:29,035 - INFO - ================================================================================
+2025-10-12 19:27:29,035 - INFO - EXECUTING TEMPSNAP
+2025-10-12 19:27:29,035 - INFO - ================================================================================
+2025-10-12 19:27:29,035 - INFO - ============================================================
+2025-10-12 19:27:29,035 - INFO - Starting TempSnap
+2025-10-12 19:27:29,036 - INFO - ============================================================
+2025-10-12 19:27:29,036 - INFO - Starting monitoring - Memory usage: 36013.20 MB
+2025-10-12 19:27:29,067 - INFO - TempSnap: Running complete pipeline with 'all' command
+2025-10-12 19:27:29,067 - INFO - Executing command: python /home/liujiajun/projects/Hap_networks/module/09-25/main.py --command all --input_dir /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/sequences_ncbi.fasta --output_dir /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results/tempsnap_results --p 16 --ratio 0.01 --ref NC_003310.1 --start 2025-06-25 --end 2025-07-23 --interval 28
+2025-10-12 19:28:25,343 - INFO - TempSnap execution successful
+2025-10-12 19:28:25,343 - INFO - Stopping monitoring - Memory usage: 38440.04 MB
+2025-10-12 19:28:25,343 - INFO - TempSnap performance recorded: {'duration_seconds': 56.30712580680847, 'duration_minutes': 0.9384520967801412, 'memory_used_mb': 2426.8359375, 'peak_memory_mb': 38440.03515625}
+2025-10-12 19:28:25,343 - INFO - ================================================================================
+2025-10-12 19:28:25,343 - INFO - EXECUTING VENAS
+2025-10-12 19:28:25,343 - INFO - ================================================================================
+2025-10-12 19:28:25,343 - INFO - ============================================================
+2025-10-12 19:28:25,343 - INFO - Starting VENAS
+2025-10-12 19:28:25,343 - INFO - ============================================================
+2025-10-12 19:28:25,344 - INFO - VENAS Part 1 results not found, starting from Part 1
+2025-10-12 19:28:25,345 - INFO - Starting monitoring - Memory usage: 38440.04 MB
+2025-10-12 19:28:25,345 - INFO - Set OMP_NUM_THREADS to 16 for VENAS parallel processing
+2025-10-12 19:28:33,158 - INFO - Using reference sequence ID: NC_003310.1
+2025-10-12 19:28:33,159 - INFO - VENAS Part 1: ePIS finding
+2025-10-12 19:29:57,744 - INFO - Starting performance comparison test
+2025-10-12 19:29:57,744 - INFO - TempSnap input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/sequences_ncbi.fasta
+2025-10-12 19:29:57,744 - INFO - VENAS input file: /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/analysed_data/sequences_ncbi_halign4_2022-2025_07_23.fasta
+2025-10-12 19:29:57,744 - INFO - Output directory: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results
+2025-10-12 19:29:57,744 - INFO - Number of processes: 16
+2025-10-12 19:29:57,754 - INFO - ================================================================================
+2025-10-12 19:29:57,754 - INFO - EXECUTING TEMPSNAP
+2025-10-12 19:29:57,754 - INFO - ================================================================================
+2025-10-12 19:29:57,754 - INFO - ============================================================
+2025-10-12 19:29:57,754 - INFO - Starting TempSnap
+2025-10-12 19:29:57,754 - INFO - ============================================================
+2025-10-12 19:29:57,754 - INFO - Starting monitoring - Memory usage: 38257.30 MB
+2025-10-12 19:29:57,886 - INFO - TempSnap: Running complete pipeline with 'all' command
+2025-10-12 19:29:57,886 - INFO - Executing command: python /home/liujiajun/projects/Hap_networks/module/09-25/main.py --command all --input_dir /home/liujiajun/projects/Hap_networks/module/09-25/09-25Mpox/sequences_ncbi.fasta --output_dir /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results/tempsnap_results --p 16 --ratio 0.01 --ref NC_003310.1 --start 2025-06-25 --end 2025-07-23 --interval 28
+2025-10-12 19:30:52,803 - INFO - TempSnap execution successful
+2025-10-12 19:30:52,803 - INFO - Stopping monitoring - Memory usage: 38791.72 MB
+2025-10-12 19:30:52,803 - INFO - TempSnap performance recorded: {'duration_seconds': 55.04857563972473, 'duration_minutes': 0.9174762606620789, 'memory_used_mb': 534.421875, 'peak_memory_mb': 38791.71875}
+2025-10-12 19:30:52,803 - INFO - ================================================================================
+2025-10-12 19:30:52,803 - INFO - EXECUTING VENAS
+2025-10-12 19:30:52,803 - INFO - ================================================================================
+2025-10-12 19:30:52,803 - INFO - ============================================================
+2025-10-12 19:30:52,803 - INFO - Starting VENAS
+2025-10-12 19:30:52,803 - INFO - ============================================================
+2025-10-12 19:30:52,804 - INFO - VENAS Part 1 results not found, starting from Part 1
+2025-10-12 19:30:52,805 - INFO - Starting monitoring - Memory usage: 38791.72 MB
+2025-10-12 19:30:52,805 - INFO - Set OMP_NUM_THREADS to 16 for VENAS parallel processing
+2025-10-12 19:31:00,696 - INFO - Using reference sequence ID: NC_003310.1
+2025-10-12 19:31:00,698 - INFO - VENAS Part 1: ePIS finding
+2025-10-12 19:41:12,468 - INFO - VENAS Part 1 completed in 611.53 seconds (0.17 hours)
+2025-10-12 19:41:12,469 - INFO - VENAS Part 2: Network construction
+2025-10-12 19:41:15,117 - INFO - VENAS Part 3: Preprocessing network file
+2025-10-12 19:41:15,132 - INFO - VENAS Part 4: Community detection and core node extraction
+2025-10-12 19:45:33,868 - INFO - VENAS result files are in the output directory
+2025-10-12 19:45:33,870 - INFO - VENAS execution successful
+2025-10-12 19:45:33,870 - INFO - Stopping monitoring - Memory usage: 37309.72 MB
+2025-10-12 19:45:33,870 - INFO - VENAS total execution time: 1492.59 seconds (0.41 hours)
+2025-10-12 19:45:33,870 - INFO -   - Part 1: 611.53 seconds (0.17 hours)
+2025-10-12 19:45:33,870 - INFO -   - Parts 2-4: 881.07 seconds (0.24 hours)
+2025-10-12 19:45:33,870 - INFO - VENAS performance recorded: {'duration_seconds': 1492.594158411026, 'duration_minutes': 24.876569306850435, 'memory_used_mb': -1482.0, 'peak_memory_mb': 37309.71875}
+2025-10-12 19:45:33,870 - INFO - ================================================================================
+2025-10-12 19:45:33,870 - INFO - GENERATING PERFORMANCE REPORT
+2025-10-12 19:45:33,870 - INFO - ================================================================================
+2025-10-12 19:45:33,870 - INFO - ============================================================
+2025-10-12 19:45:33,870 - INFO - Generating performance comparison report
+2025-10-12 19:45:33,870 - INFO - ============================================================
+2025-10-12 19:45:33,906 - INFO - Performance report saved to: /home/liujiajun/projects/Hap_networks/module/09-25/Performance_benchmark_results/TempSnap_VS_VENAS/Mpox_results/performance_comparison.csv
+2025-10-12 19:45:33,912 - INFO - Performance comparison completed
+2025-10-12 19:45:33,912 - INFO - Both tools executed successfully

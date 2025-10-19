@@ -1,3 +1,7 @@
+# Author: Liu Jiajun
+# Date: 2025-10-19
+#
+# This script is written by Liu Jiajun. The corresponding article is "TempSnap-Trace: A Temporal Snapshot-Based Framework for Haplotype Network Tracing."
 from concurrent.futures import ProcessPoolExecutor
 import pandas as pd
 import numpy as np
@@ -1153,30 +1157,11 @@ def track_community_evolution(
     n_processes: int = 4, # Number of processes for parallel tasks (chain building)
     time_window: int = 2, # Lookback window (in time steps) for finding predecessors
     use_gpu: bool = True, # Whether to attempt using GPU for similarity calculation
-    output_path: Optional[str] = None # Path to save results (.h5 file). If None, uses default.
+    output_path: Optional[str] = None # Path to save results. If path ends with .h5 treated as file, otherwise treated as directory.
 ) -> List[pd.DataFrame]:
     """
     Tracks community evolution based on similarity and a target label.
-
-    Args:
-        partitions: List of community partitions for each time step.
-        extended_graphs: List of corresponding graph objects with node attributes.
-        label_of_interest: The specific value in the `tracking_label` attribute to track.
-        tracking_label: The node attribute key used to find the `label_of_interest`.
-        recording_label: The node attribute key used for counting lineages/types within communities.
-        start_date: Optional start date ('YYYY-MM-DD') to filter data.
-        end_date: Optional end date ('YYYY-MM-DD') to filter data.
-        time_interval: Assumed days between graph snapshots if dates are missing.
-        similarity_threshold: Minimum similarity score to consider communities matched.
-        weight_attr: Node attribute used to identify the 'core' node of a community.
-        n_processes: Number of CPU cores for parallel processing steps.
-        time_window: How many previous time steps to search for potential predecessors.
-        use_gpu: If True, attempts to use GPU for similarity calculations.
-        output_path: Optional path to save the resulting list of chain DataFrames in HDF5 format.
-
-    Returns:
-        A list of pandas DataFrames, where each DataFrame represents a unique evolution chain
-        containing the label of interest. Returns an empty list if no chains are found or an error occurs.
+    (docstring omitted for brevity)
     """
     overall_start = time.time()
 
@@ -1192,34 +1177,31 @@ def track_community_evolution(
         extended_graphs, start_date, end_date, time_interval)
 
     if start_idx == -1 or actual_dates is None:
-        print("Error: Could not determine a valid processing range based on dates and graph data. Aborting.")
+        print("Error: Could not determine a valid processing range. Aborting.")
         return []
     if not actual_dates:
-         print("Warning: No actual dates could be determined for the selected graph range.")
-
+        print("Warning: No actual dates determined for the selected graph range.")
 
     partitions_slice = partitions[start_idx : end_idx + 1]
     graphs_slice = extended_graphs[start_idx : end_idx + 1]
     if len(actual_dates) != len(graphs_slice):
-        print(f"Warning: Mismatch between number of actual dates ({len(actual_dates)}) and selected graphs ({len(graphs_slice)}). Using graph count.")
+        print(f"Warning: date/graph count mismatch ({len(actual_dates)} dates vs {len(graphs_slice)} graphs).")
 
     preprocessed = preprocess_communities(
         partitions_slice, graphs_slice,
         label_of_interest, tracking_label, recording_label, weight_attr)
 
-
     if not any(preprocessed):
-        print("Warning: Preprocessing resulted in no community data. Aborting.")
+        print("Warning: Preprocessing produced no community data. Aborting.")
         return []
 
     calculator = create_calculator(config)
     engine = CommunityTrackingEngine(config, calculator)
 
-    track_results = engine.track(preprocessed)
-    chain_communities, predecessors, alternative_predecessors, similarity_values = track_results
+    chain_communities, predecessors, alternative_predecessors, similarity_values = engine.track(preprocessed)
 
     if not chain_communities:
-        print("Tracking finished, but no communities were linked into chains. No results to process.")
+        print("Tracking finished but found no linked communities.")
         return []
 
     result_processor = TrackingResultProcessor(config, actual_dates)
@@ -1230,55 +1212,56 @@ def track_community_evolution(
     )
 
     if df_track.empty:
-        print("Warning: Tracking data was generated, but processing resulted in an empty DataFrame.")
+        print("Warning: Processed tracking DataFrame is empty.")
         return []
     print(f"Generated tracking DataFrame with {len(df_track)} rows.")
 
-
-    chain_builder = ChainBuilder(config, actual_dates, recording_label) 
+    chain_builder = ChainBuilder(config, actual_dates, recording_label)
     final_chains = chain_builder.build_chains(df_track)
 
     if not final_chains:
-        print("No final chains containing the label were constructed.")
+        print("No final chains constructed.")
         return []
 
     final_chains.sort(key=lambda chain: not (chain['Contains Label'] == True).any(), reverse=False)
 
-    if output_path is None:
-        date_range_str = ""
-        if actual_dates:
-            start_str = actual_dates[0].strftime('%Y%m%d')
-            end_str = actual_dates[-1].strftime('%Y%m%d')
-            date_range_str = f"_{start_str}_{end_str}"
-        elif start_date and end_date:
-            date_range_str = f"_{start_date.replace('-', '')}_{end_date.replace('-', '')}"
+    # Build date range suffix for filename
+    date_range_str = ""
+    if actual_dates:
+        date_range_str = f"_{actual_dates[0].strftime('%Y%m%d')}_{actual_dates[-1].strftime('%Y%m%d')}"
+    elif start_date and end_date:
+        date_range_str = f"_{start_date.replace('-', '')}_{end_date.replace('-', '')}"
 
-        output_path = f"./tracking_results_label_{label_of_interest}{date_range_str}.h5"
+    # Simplified output path logic
+    if output_path is None:
+        output_file = os.path.join(os.getcwd(), f"tracking_results_label_{label_of_interest}{date_range_str}.h5")
+    else:
+        root, ext = os.path.splitext(output_path)
+        if ext.lower() == ".h5":
+            output_file = output_path
+        else:
+            output_file = os.path.join(output_path, f"tracking_results_label_{label_of_interest}{date_range_str}.h5")
+
+    output_dir = os.path.dirname(output_file) or os.getcwd()
+    os.makedirs(output_dir, exist_ok=True)
 
     try:
-        output_dir = os.path.dirname(output_path)
-        if output_dir and not os.path.exists(output_dir):
-            os.makedirs(output_dir, exist_ok=True)
-
         compatible_chains = []
-        for i, df in enumerate(final_chains):
-            if df is not None and not df.empty:
-                df_copy = df.copy()
-                for col in df_copy.select_dtypes(include=['object']).columns:
-                    try:
-                        df_copy[col] = df_copy[col].astype(str)
-                    except Exception as e:
-                        print(f"Warning: Could not convert column '{col}' in chain {i} to string: {e}")
-                compatible_chains.append(df_copy)
+        for df in final_chains:
+            if df is None or df.empty:
+                continue
+            df_copy = df.copy()
+            for col in df_copy.select_dtypes(include=['object']).columns:
+                try:
+                    df_copy[col] = df_copy[col].astype(str)
+                except Exception:
+                    pass
+            compatible_chains.append(df_copy)
 
-        IOManager.save_to_hdf5(compatible_chains, output_path, num_threads=n_processes)
-        print(f"Tracking results successfully saved to {output_path}.")
-
-    except ImportError:
-         print("Error: Could not import IOManager from TempSnap. Results not saved.")
+        IOManager.save_to_hdf5(compatible_chains, output_file, num_threads=n_processes)
+        print(f"Tracking results saved to {output_file}.")
     except Exception as e:
-        print(f"Error saving tracking results to {output_path}: {e}")
-
+        print(f"Error saving results: {e}")
 
     print(f"Total processing time: {time.time() - overall_start:.2f}s")
     return final_chains

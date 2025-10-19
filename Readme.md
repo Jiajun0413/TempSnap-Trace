@@ -20,6 +20,54 @@ The core workflow consists of the following steps:
 
 Steps 1-4 are orchestrated by `main.py`, while step 5 is performed by the `Trace.py` module.
 
+## Datasets
+
+TempSnap-Trace has been validated on the following datasets:
+
+### Dataset 1: SARS-CoV-2 in South Africa
+*   **Source:** GISAID EpiCoV database (https://gisaid.org/)
+*   **Filters:** "High coverage" sequences
+*   **Collection Period:** March 6 – December 17, 2020
+*   **Initial Sequences:** 3,162
+*   **After QC (N content < 0.001):** 2,128 sequences
+*   **Metadata:** Sample ID, collection date, location, lineage, clade, etc.
+
+### Dataset 2: SARS-CoV-2 in Brazil
+*   **Source:** GISAID EpiCoV database (https://gisaid.org/)
+*   **Filters:** "High coverage" sequences
+*   **Collection Period:** June 1 – December 6, 2020
+*   **Initial Sequences:** 5,465
+*   **After QC (N content < 0.001):** 4,281 sequences
+*   **Metadata:** Same content as Dataset 1
+
+### Dataset 3: Global SARS-CoV-2
+*   **Source:** Adapted from standard dataset Data S1 by Lun Li et al.
+*   **Total Sequences:** 4,396,290
+*   **Collection Period:** Up to February 28, 2022
+*   **Metadata:** Comprehensive global metadata
+
+### Dataset 4: Global Mpox
+*   **Source:** NCBI Virus database (https://www.ncbi.nlm.nih.gov/labs/virus/vssi/)
+*   **Filters:** 
+    *   Organism: Monkeypox virus (taxid:10244)
+    *   Sequence length: 196,000–198,000 bp
+*   **Collection Period:** January 1, 2022 – September 24, 2025
+*   **Initial Sequences:** 4,956
+*   **After QC (N content < 0.01):** 3,687 sequences
+*   **Metadata (via custom FASTA header):** Accession, Collection Date, Geo Location, MPXV Lineage
+
+### Dataset 5: Global SARS-CoV-2 for Performance Test
+*   **Source:** NCBI Virus database (https://www.ncbi.nlm.nih.gov/labs/virus/vssi/)
+*   **Filters:** 
+    *   Organism: Severe acute respiratory syndrome coronavirus 2 (taxid:2697049)
+    *   Sequence length: ≥29,000 bp
+*   **Collection Period:** December 30, 2019 – September 28, 2025
+*   **Initial Sequences:** 8,731,667
+*   **After QC (N content < 0.001):** 2,420,470 sequences
+*   **Metadata (via custom FASTA header):** Accession, Collection Date, Geo Location, Pangolin lineage
+
+**Quality Control Note:** All datasets were filtered to remove sequences with excessive ambiguous nucleotides (N content), with thresholds set at < 0.001 for SARS-CoV-2 and < 0.01 for Mpox.
+
 ## Prerequisites
 
 ### Software
@@ -40,8 +88,8 @@ pip install -r requirements.txt
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/Jiajun0413/TempSnap-Trace.git
-    cd TempSnap-Trace
+    git clone https://github.com/Jiajun0413/TempSnap-Trace
+    cd TempSnap-Trace # Adjust path as needed
     ```
 2.  **Install Python dependencies:**
     ```bash
@@ -105,8 +153,34 @@ track_community_evolution(partitions, extended_graphs, label_of_interest, tracki
 
 ### Input File Formats
 
-*   **Sequence File:** Standard FASTA format (`.fasta`, `.fa`, `.fna`).
-*   **Metadata File:** Tabular format (`.tsv`, `.csv`, `.xls`, `.xlsx`) with columns for sequence ID, collection date, and optional fields like lineage, clade, and location.
+TempSnap-Trace accepts sequence and metadata files from multiple sources, with format requirements depending on the data source:
+
+#### GISAID Database Format
+
+*   **Sequence File:** Standard FASTA format (`.fasta`, `.fa`, `.fna`) with GISAID-style headers (e.g., `>hCoV-19/Country/ID/2020|EPI_ISL_XXXXXX|2020-XX-XX`).
+*   **Metadata File:** Tabular format (`.tsv`, `.csv`, `.xls`, `.xlsx`) exported from GISAID EpiCoV database. Required columns include:
+    *   Sequence ID (e.g., `EPI_ISL_XXXXXX`)
+    *   Collection date
+    *   Optional fields: lineage, clade, location, host, etc.
+*   **Example Sources:** Datasets 1–3 (South Africa SARS-CoV-2, Brazil SARS-CoV-2, Global SARS-CoV-2)
+
+#### NCBI Virus Database Format
+
+*   **Sequence File:** Standard FASTA format (`.fasta`, `.fa`, `.fna`) with **custom-formatted headers**. The header format is configured during download via "Build custom" option in "Download All Results" Step 3: FASTA definition line.
+    *   **Header Format:** `>Accession|Collection_Date|Geo_Location|Lineage_Info`
+    *   **Example (SARS-CoV-2):** `>OQ123456|2023-05-15|USA: California|B.1.1.7`
+    *   **Example (Mpox):** `>ON987654|2022-06-20|United Kingdom|B.1`
+*   **Metadata File:** Not required separately if header contains all necessary information. Alternatively, provide a tabular file (`.tsv`, `.csv`) with columns:
+    *   Accession (matching FASTA header)
+    *   Collection Date
+    *   Geo Location
+    *   Lineage/Clade information
+*   **Example Sources:** Datasets 4–5 (Global Mpox, Global SARS-CoV-2 for Performance Test)
+
+**Important Notes:**
+*   For NCBI data, ensure the FASTA header includes all metadata fields (Accession, Collection Date, Geo Location, Lineage) separated by the delimiter character (default: `|`). This can be configured during download by selecting appropriate fields in the "Build custom" option.
+*   The pipeline automatically parses headers to extract metadata. Consistency in delimiter and field order is critical.
+*   All sequence files should use standard FASTA format regardless of source.
 
 ### Key Output Files
 
@@ -184,11 +258,8 @@ if communities and graphs:
 *   **HDF5 Storage:** Results are stored efficiently in HDF5 format. Ensure sufficient disk space.
 *   **Logging:** `main.py` logs progress to the console and to `log.txt` in the output directory.
 
-## Supplementary Data
+## Citation
 
-The following datasets and their respective analysis results can be obtained from https://zenodo.org/records/15696574:
+If you use TempSnap-Trace in your research, please cite:
 
-Dataset 1 (South_Africa.zip)
-Dataset 2 (Brazil.zip)
-Dataset 3 (Global_dataset.zip)
-Dataset 4 (Mpox.zip)
+*[Insert citation details here: e.g., publication, software DOI, repository link]*

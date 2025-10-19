@@ -1,3 +1,12 @@
+
+# This script is based on the method described in the paper:
+#
+# Machine learning detection of SARS-CoV-2 high-risk variants
+# Lun Li, Cuiping Li, Na Li, Dong Zou, Wenming Zhao, Yongbiao Xue,
+# Zhang Zhang, Yiming Bao, Shuhui Song
+# bioRxiv (2023.04.19.537460)
+# https://doi.org/10.1101/2023.04.19.537460
+
 from multiprocessing import Pool
 import pandas as pd
 import numpy as np

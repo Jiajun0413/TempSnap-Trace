@@ -1,0 +1,3 @@
+Dataset,Samples,Impl,Processes,Runtime(s),Memory_MB,Peak_Memory_MB,Speedup_vs_VENAS
+Sequences_900w,2420470,TEMPSNAP,16,85026.95,12555.95,49543.32,1.0
+Sequences_900w,2420470,VENAS,16,170984.69,-19126.57,30416.75,2.01
