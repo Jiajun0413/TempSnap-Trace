@@ -1,0 +1,9 @@
+Dataset,Samples,Impl,Processes,Runtime(s),Speedup_vs_Perl
+Mpox,3688,Perl,1,908.43,1.0
+Mpox,3688,Python,1,45.85,19.81
+Mpox,3688,Python,2,18.31,49.61
+Mpox,3688,Python,4,16.05,56.6
+Mpox,3688,Python,8,11.35,80.04
+Mpox,3688,Python,16,11.2,81.11
+Mpox,3688,Python,32,11.15,81.47
+Mpox,3688,Python,64,12.34,73.62
