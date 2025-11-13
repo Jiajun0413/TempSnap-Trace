@@ -261,5 +261,15 @@ if communities and graphs:
 ## Citation
 
 If you use TempSnap-Trace in your research, please cite:
-
-*[Insert citation details here: e.g., publication, software DOI, repository link]*
+```bibtex
+@article{LIU2025,
+title = {TempSnap-trace: A temporal snapshot-based framework for haplotype network tracing},
+journal = {Biosafety and Health},
+year = {2025},
+issn = {2590-0536},
+doi = {https://doi.org/10.1016/j.bsheal.2025.11.003},
+url = {https://www.sciencedirect.com/science/article/pii/S2590053625001703},
+author = {Jiajun Liu and Decheng Li and Yixue Li and Tao Huang},
+keywords = {Community detection, Haplotype network, Evolutionary path, Severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), Mpox}
+}
+```
